@@ -36,10 +36,10 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
         ArrayList<ItemProduct> products = new ArrayList<>();
-        products.add(new ItemProduct("Bed Sealy","DICO","+52 3315115016","Mariano Otero Guadalajara", getResources().getDrawable(R.drawable.cama)));
-        products.add(new ItemProduct("Individual Couch RED","DICO", "+52 3331988864","Mariano Otero Guadalajara", getResources().getDrawable(R.drawable.sillon)));
+        products.add(new ItemProduct(getString(R.string.home_name_1),getString(R.string.home_store_1),getString(R.string.home_location_1),getString(R.string.home_phone_1), 5,5));
+        products.add(new ItemProduct(getString(R.string.home_name_2),getString(R.string.home_store_2),getString(R.string.home_location_2),getString(R.string.home_phone_2),6,6));
 
-        adapter = new AdapterProduct(getActivity(), products);
+        adapter = new AdapterProduct(getActivity(), products, getContext());
         recyclerView.setAdapter(adapter);
         return view;
     }

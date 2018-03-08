@@ -91,7 +91,7 @@
             android:layout_alignStart="@id/card_home_info"
             android:layout_below="@id/card_home_info"
             android:background="?android:attr/selectableItemBackground"
-            android:text="SHARE"
+            android:text="@string/ip_share"
             android:textColor="@android:color/black"/>
 
         <Button
@@ -101,7 +101,7 @@
             android:layout_below="@id/card_home_info"
             android:layout_toEndOf="@id/item_product_share"
             android:background="?android:attr/selectableItemBackground"
-            android:text="SEE MORE"
+            android:text="@string/ip_see_more"
             android:textColor="#03A9F4"/>
 
 

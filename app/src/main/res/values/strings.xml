@@ -1,5 +1,54 @@
 <resources>
-    <string name="app_name">Target</string>
+    <string name="app_name">Iteso Store</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Strings para Tabs-->
+    <string name="tech">Technology</string>
+    <string name="home">Home</string>
+    <string name="elec">Electronics</string>
+
+    <!-- Strings para Technology -->
+    <string name="tech_name_1">Mac</string>
+    <string name="tech_store_1">BestBuy</string>
+    <string name="tech_phone_1">+52 3311344912</string>
+    <string name="tech_location_1">Plaza Galerías Guadalajara</string>
+
+    <string name="tech_name_2">Alienware</string>
+    <string name="tech_store_2">DELL</string>
+    <string name="tech_phone_2">+52 3315115016</string>
+    <string name="tech_location_2">Plaza Ciudadela LifeStyle Guadalajara</string>
+
+    <string name="tech_name_3">Lanix</string>
+    <string name="tech_store_3">Saint Johnny</string>
+    <string name="tech_phone_3">+52 3313536913</string>
+    <string name="tech_location_3">Zapopan</string>
+
+    <!-- Strings para Home -->
+    <string name="home_name_1">Bed Sealy</string>
+    <string name="home_store_1">DICO</string>
+    <string name="home_phone_1">+52 3331988864</string>
+    <string name="home_location_1">Mariano Otero Guadalajara</string>
+
+    <string name="home_name_2">Individual Couch RED</string>
+    <string name="home_store_2">DICO</string>
+    <string name="home_phone_2">+52 3336776679</string>
+    <string name="home_location_2">Mariano Otero Guadalajara</string>
+
+    <!-- Strings para Electronics -->
+    <string name="elec_name_1">Washing Machine GE</string>
+    <string name="elec_store_1">DICO</string>
+    <string name="elec_phone_1">+52 3331988864</string>
+    <string name="elec_location_1">Mariano Otero Guadalajara</string>
+
+    <string name="elec_name_2">Estereo BOSE</string>
+    <string name="elec_store_2">BestBuy</string>
+    <string name="elec_phone_2">+52 3311344912</string>
+    <string name="elec_location_2">Plaza Ciudadela Lifestyle Guadalajara</string>
+
+    <!-- Strings para item_product -->
+    <string name="ip_see_more">SEE MORE</string>
+    <string name="ip_share">SHARE</string>
+
+
 </resources>

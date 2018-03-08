@@ -1,5 +1,8 @@
 package com.example.adriana.target;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -119,11 +122,8 @@ public class ActivityMain extends AppCompatActivity {
             recyclerView.setLayoutManager(mLayoutManager);
 
             products = new ArrayList<>();
-        //    products.add(new ItemProduct("Mac","BestBuy","+52 3315115016","Plaza Galerías Guadalajara", getResources().getDrawable(R.drawable.mac)));
-          //  products.add(new ItemProduct("AlienWare","DELL", "+52 3331988864","Plaza Ciudadela Lifestyle Guadalajara", getResources().getDrawable(R.drawable.alienware)));
-            //products.add(new ItemProduct("Lanix","Saint Johny", "+52 3313536913","Zapopan",getResources().getDrawable(R.drawable.lanix)));
 
-            AdapterProduct adapterProduct = new AdapterProduct(getActivity(), products);
+            AdapterProduct adapterProduct = new AdapterProduct(getActivity(), products, this.getContext());
             recyclerView.setAdapter(adapterProduct);
 
             return rootView;
@@ -131,7 +131,7 @@ public class ActivityMain extends AppCompatActivity {
     }
 
 
-
+    FragmentTechnology fragmentTechnology;
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -142,17 +142,23 @@ public class ActivityMain extends AppCompatActivity {
             super(fm);
         }
 
+
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            switch (position){
-                case 0: return new FragmentTechnology();
-                case 1: return new FragmentHome();
-                case 2: return new FragmentElectronics();
-                default: return new FragmentTechnology();
+            switch (position) {
+                case 0:
+                    if(fragmentTechnology == null){
+                        fragmentTechnology = new FragmentTechnology();
+                    }
+                    return fragmentTechnology;
+                case 1:
+                    return new FragmentHome();
+                case 2:
+                    return new FragmentElectronics();
+                default:
+                    return new FragmentTechnology();
             }
-        }
+        };
 
         @Override
         public int getCount() {
@@ -163,11 +169,35 @@ public class ActivityMain extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position){
-                case 0: return "Technology";
-                case 1: return "Home";
-                case 2: return "Electronics";
+                case 0: return getString(R.string.tech);
+                case 1: return getString(R.string.home);
+                case 2: return getString(R.string.elec);
             }
             return null;
+        }
+    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        switch (requestCode){
+//            case 9999:
+//                if(resultCode == Activity.RESULT_OK){
+//                    ItemProduct item = data.getParcelableExtra("TAB");
+//                    if(item != null){
+//
+//                    }
+//                }
+//                break;
+//        }
+//    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 3 || requestCode == 2 || requestCode == 4){
+            if(resultCode == Activity.RESULT_OK){
+                fragmentTechnology.onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 }

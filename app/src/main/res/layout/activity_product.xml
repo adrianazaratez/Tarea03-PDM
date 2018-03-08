@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.adriana.target.ActivityProduct">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/activity_product_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerInside" />
+
+        <EditText
+            android:id="@+id/activity_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de producto"/>
+
+        <EditText
+            android:id="@+id/activity_product_store"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tienda" />
+
+        <EditText
+            android:id="@+id/activity_product_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ubicación"/>
+
+        <EditText
+            android:id="@+id/activity_product_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Teléfono"
+            android:inputType="phone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/activity_product_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="GUARDAR"/>
+
+        <Button
+            android:id="@+id/activity_product_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="CANCELAR"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,9 +1,11 @@
 package com.example.adriana.target;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,8 +31,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     ArrayList<ItemProduct> products;
     private Context context;
 
-    public AdapterProduct(FragmentActivity activity, ArrayList<ItemProduct> products){
+    public AdapterProduct(FragmentActivity activity, ArrayList<ItemProduct> products, Context context){
         this.products = products;
+        this.context = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -69,7 +72,32 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         holder.mStore.setText(products.get(position).getStore());
         holder.mLocation.setText(products.get(position).getLocation());
         holder.mPhone.setText(products.get(position).getPhone());
-        holder.mImage.setImageDrawable(products.get(position).getPicture());
+        switch(products.get(position).getPicture()){
+            case 0:
+                holder.mImage.setImageResource(R.drawable.lavadora);
+                break;
+            case 1:
+                holder.mImage.setImageResource(R.drawable.estereo);
+                break;
+            case 2:
+                holder.mImage.setImageResource(R.drawable.mac);
+                break;
+            case 3:
+                holder.mImage.setImageResource(R.drawable.alienware);
+                break;
+            case 4:
+                holder.mImage.setImageResource(R.drawable.lanix);
+                break;
+            case 5:
+                holder.mImage.setImageResource(R.drawable.cama);
+                break;
+            case 6:
+                holder.mImage.setImageResource(R.drawable.sillon);
+                break;
+            default:
+                holder.mImage.setImageResource(R.drawable.mac);
+                break;
+        }
 
         holder.mPhone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,22 +111,50 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         holder.mSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),products.get(position).toString(),Toast.LENGTH_LONG).show();
+                ItemProduct product = new ItemProduct(products.get(position).getTitle(),
+                        products.get(position).getStore(),
+                        products.get(position).getLocation(),
+                        products.get(position).getPhone(),
+                        products.get(position).getPicture(),
+                        products.get(position).getCode());
+                Intent intent = new Intent();
+                intent.setClass(context,ActivityProduct.class);
+                intent.putExtra("TAB",product);
+                ((ActivityMain) context).startActivityForResult(intent,products.get(position).getCode());
             }
         });
         holder.mShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),products.get(position).toString(),Toast.LENGTH_LONG).show();
+                ItemProduct product = new ItemProduct(products.get(position).getTitle(),
+                        products.get(position).getStore(),
+                        products.get(position).getLocation(),
+                        products.get(position).getPhone(),
+                        products.get(position).getPicture(),
+                        products.get(position).getCode());
+                Intent intent = new Intent();
+                intent.setClass(context,ActivityProduct.class);
+                intent.putExtra("TAB",product);
+                ((ActivityMain) context).startActivityForResult(intent,products.get(position).getCode());
             }
         });
         holder.mCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),products.get(position).toString(),Toast.LENGTH_LONG).show();
+                ItemProduct product = new ItemProduct(products.get(position).getTitle(),
+                        products.get(position).getStore(),
+                        products.get(position).getLocation(),
+                        products.get(position).getPhone(),
+                        products.get(position).getPicture(),
+                        products.get(position).getCode());
+                Intent intent = new Intent();
+                intent.setClass(context,ActivityProduct.class);
+                intent.putExtra("TAB",product);
+                ((ActivityMain) context).startActivityForResult(intent,products.get(position).getCode());
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

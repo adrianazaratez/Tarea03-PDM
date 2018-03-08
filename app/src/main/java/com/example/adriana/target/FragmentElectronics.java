@@ -23,6 +23,10 @@ public class FragmentElectronics extends android.support.v4.app.Fragment{
 
     }
 
+    public void changeData(){
+
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         RecyclerView.Adapter adapter;
@@ -36,10 +40,10 @@ public class FragmentElectronics extends android.support.v4.app.Fragment{
         recyclerView.setLayoutManager(mLayoutManager);
 
         ArrayList<ItemProduct> electronics = new ArrayList<>();
-        electronics.add(new ItemProduct("WashingMachine GE","VICO","+52 3315115016","Mariano Otero Guadalajara", getResources().getDrawable(R.drawable.lavadora)));
-        electronics.add(new ItemProduct("Estereo BOSE","BestBuy", "+52 3331988864","Plaza Ciudadela Lifestyle Guadalajara", getResources().getDrawable(R.drawable.estereo)));
+        electronics.add(new ItemProduct(getString(R.string.elec_name_1),getString(R.string.elec_store_1),getString(R.string.elec_location_1),getString(R.string.elec_phone_1), 0,0));
+        electronics.add(new ItemProduct(getString(R.string.elec_name_2),getString(R.string.elec_store_2),getString(R.string.elec_location_2),getString(R.string.elec_phone_2),1,1));
 
-        adapter = new AdapterProduct(getActivity(), electronics);
+        adapter = new AdapterProduct(getActivity(), electronics, getContext());
         recyclerView.setAdapter(adapter);
         return view;
     }
