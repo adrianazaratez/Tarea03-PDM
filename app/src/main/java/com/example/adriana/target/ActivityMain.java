@@ -2,6 +2,7 @@ package com.example.adriana.target;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +17,11 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.adriana.target.beans.ItemProduct;
 
@@ -40,7 +43,7 @@ public class ActivityMain extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
+    Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,17 +73,26 @@ public class ActivityMain extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch(item.getItemId()){
+            case R.id.action_logout:
+                SharedPreferences sharedPreferences = getSharedPreferences("com.example.adriana.USER_PREFERENCES",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                Intent intent = new Intent(ActivityMain.this,ActivityLogin.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.action_privacy_police:
+                Intent intent1 = new Intent(ActivityMain.this,ActivityPrivacyPolice.class);
+                startActivity(intent1);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -132,6 +144,8 @@ public class ActivityMain extends AppCompatActivity {
 
 
     FragmentTechnology fragmentTechnology;
+    FragmentHome fragmentHome;
+    FragmentElectronics fragmentElectronics;
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -152,9 +166,15 @@ public class ActivityMain extends AppCompatActivity {
                     }
                     return fragmentTechnology;
                 case 1:
-                    return new FragmentHome();
+                    if(fragmentHome == null){
+                        fragmentHome = new FragmentHome();
+                    }
+                    return fragmentHome;
                 case 2:
-                    return new FragmentElectronics();
+                    if(fragmentElectronics == null){
+                        fragmentElectronics = new FragmentElectronics();
+                    }
+                    return fragmentElectronics;
                 default:
                     return new FragmentTechnology();
             }
@@ -177,24 +197,18 @@ public class ActivityMain extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        switch (requestCode){
-//            case 9999:
-//                if(resultCode == Activity.RESULT_OK){
-//                    ItemProduct item = data.getParcelableExtra("TAB");
-//                    if(item != null){
-//
-//                    }
-//                }
-//                break;
-//        }
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 3 || requestCode == 2 || requestCode == 4){
+            if(resultCode == Activity.RESULT_OK){
+                fragmentTechnology.onActivityResult(requestCode, resultCode, data);
+            }
+        }else if(requestCode == 0 || requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
+                fragmentTechnology.onActivityResult(requestCode, resultCode, data);
+            }
+        }else{
             if(resultCode == Activity.RESULT_OK){
                 fragmentTechnology.onActivityResult(requestCode, resultCode, data);
             }
