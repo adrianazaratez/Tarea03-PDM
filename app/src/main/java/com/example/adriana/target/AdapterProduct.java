@@ -69,9 +69,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.mTitle.setText(products.get(position).getTitle());
-        holder.mStore.setText(products.get(position).getStore().getName());
-        holder.mLocation.setText(products.get(position).getStore().getCity().getName());
-        holder.mPhone.setText(products.get(position).getStore().getPhone());
+      //  holder.mStore.setText(products.get(position).getStore().getName());
+      //  holder.mLocation.setText(products.get(position).getStore().getCity().getName());
+      //  holder.mPhone.setText(products.get(position).getStore().getPhone());
         switch(products.get(position).getPicture()){
             case 0:
                 holder.mImage.setImageResource(R.drawable.lavadora);

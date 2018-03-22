@@ -57,10 +57,11 @@ public class ActivitySplashScreen extends AppCompatActivity {
     public void consult(){
         DatabaseHandler dh = DatabaseHandler.getInstance(ActivitySplashScreen.this);
         StoreControl control = new StoreControl();
-        ArrayList<Store> stores = control.getStores(dh);
+        ArrayList<Store> stores = new ArrayList<>();
+        stores = control.getStores(dh);
         City city = new City(1,"Guadalajara");
 
-        if(stores.size() == 0){
+        if(stores.size() < 1){
             Store store1 = new Store(1,"Best Buy","3311344912",1,18.023,23.1231,city);
             Store store2 = new Store(2,"Mac Store","3313536913",2,18.032,23.1112,city);
             Store store3 = new Store(3,"Saint Jhonny","3331988864",3,18.020,23.1312,city);

@@ -12,7 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.adriana.target.AdapterProduct;
 import com.example.adriana.target.R;
+import com.example.adriana.target.beans.Category;
+import com.example.adriana.target.beans.City;
 import com.example.adriana.target.beans.ItemProduct;
+import com.example.adriana.target.beans.Store;
 import com.example.adriana.target.database.DatabaseHandler;
 import com.example.adriana.target.database.ItemProductControl;
 
@@ -52,12 +55,21 @@ public class FragmentTechnology extends android.support.v4.app.Fragment{
         ItemProductControl categoryProd = new ItemProductControl();
 
         products = categoryProd.getItemProductsByCategory(0,dh);
-       /*
-        products.add(new ItemProduct(getString(R.string.tech_name_1), getString(R.string.tech_store_1), getString(R.string.tech_location_1), getString(R.string.tech_phone_1), 2,2));
-        products.add(new ItemProduct(getString(R.string.tech_name_2), getString(R.string.tech_store_2),  getString(R.string.tech_location_2),getString(R.string.tech_phone_2),3,3));
-        products.add(new ItemProduct(getString(R.string.tech_name_3), getString(R.string.tech_store_3),  getString(R.string.tech_location_3),getString(R.string.tech_phone_3),4,4));
+//
+//        ItemProduct product = new ItemProduct();
+//        product.setCode(1);
+//        product.setTitle("Mac");
+//        product.setPicture(2);
+//        product.setDescription("");
+//        Store store = new Store();
+//        store.setName("BEST BUY");
+//        store.setCity(new City(1,"Guadalajara"));
+//        store.setPhone("3311344912");
+//        product.setStore(store);
+//        product.setCategory(new Category(1,"TECHNOLOGY"));
+//        products.add(product);
 
-*/
+
         adapter = new AdapterProduct(getActivity(), products,getContext());
         recyclerView.setAdapter(adapter);
         return view;

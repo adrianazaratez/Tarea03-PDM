@@ -7,6 +7,7 @@ import android.os.Build;
 
 import com.example.adriana.target.beans.Category;
 import com.example.adriana.target.beans.ItemProduct;
+import com.example.adriana.target.beans.Store;
 
 import java.util.ArrayList;
 
@@ -28,18 +29,19 @@ public class ItemProductControl {
         inserted = db.insert(DatabaseHandler.TABLE_PRODUCT, null, values);
         db = null;
         values = null;
+        SQLiteDatabase db1 = dh.getWritableDatabase();
+        ContentValues values1 = new ContentValues();
         inserted = 0;
-         db = dh.getWritableDatabase();
-         values = new ContentValues();
 
-         values.put(DatabaseHandler.KEY_PRODUCT_ID, product.getCode());
-         values.put(DatabaseHandler.KEY_STORE_ID, product.getStore().getId());
+         values1.put(DatabaseHandler.KEY_PRODUCT_ID, product.getCode());
+         values1.put(DatabaseHandler.KEY_STORE_ID, product.getStore().getId());
 
-         inserted = db.insert(DatabaseHandler.TABLE_STOREPRODUCT,null,values);
+         inserted = db1.insert(DatabaseHandler.TABLE_STOREPRODUCT,null,values1);
 
          // Closing database connection
-        try {db.close();} catch (Exception e) {}
+        try {db.close();db1.close();} catch (Exception e) {}
         db = null; values = null;
+        db1 = null;values1 =null;
         return inserted;
     }
 
