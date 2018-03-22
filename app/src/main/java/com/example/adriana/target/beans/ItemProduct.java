@@ -14,32 +14,30 @@ import com.example.adriana.target.R;
  */
 
 public class ItemProduct implements Parcelable{
-    private String title;
-    private String store;
-    private String phone;
-    private String location;
-    private int picture;
-    private String imageResource;
     private int code;
+    private String title;
+    private String description;
+    private int picture;
+    private Store store;
+    private Category category;
 
     public ItemProduct(Parcel in){
         title = in.readString();
-        store = in.readString();
-        location = in.readString();
-        phone = in.readString();
+        store = in.readParcelable(Store.class.getClassLoader());
         picture = in.readInt();
         code = in.readInt();
- //       imageResource = in.readString();
+        category = in.readParcelable(Category.class.getClassLoader());
     }
 
-    public ItemProduct(String title, String store, String location,  String phone,int picture1,int code) {
+    public ItemProduct() {
+    }
+
+    public ItemProduct(String title, Store store, int picture1, int code, Category category) {
         this.title = title;
         this.store = store;
-        this.location = location;
-        this.phone = phone;
         this.picture = picture1;
         this.code = code;
-   //     this.imageResource = picture1.toString();
+        this.category = category;
     }
 
     @Override
@@ -50,12 +48,10 @@ public class ItemProduct implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
-        dest.writeString(store);
-        dest.writeString(location);
-        dest.writeString(phone);
+        dest.writeParcelable((Parcelable)store,flags);
         dest.writeInt(picture);
         dest.writeInt(code);
-   //     dest.writeString(imageResource);
+        dest.writeParcelable((Parcelable)category,flags);
     }
 
     public static final Parcelable.Creator<ItemProduct> CREATOR =
@@ -76,10 +72,32 @@ public class ItemProduct implements Parcelable{
         return "ItemProduct{" +
                 "title='" + title + '\'' +
                 ", store='" + store + '\'' +
-                ", phone='" + phone + '\'' +
-                ", location='" + location + '\'' +
                 ", picture=" + picture +
                 '}';
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public int getCode() {
@@ -98,43 +116,11 @@ public class ItemProduct implements Parcelable{
         this.title = title;
     }
 
-    public String getStore() {
-        return store;
-    }
-
-    public void setStore(String store) {
-        this.store = store;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public int getPicture() {
         return picture;
     }
 
     public void setPicture(int picture) {
         this.picture = picture;
-    }
-
-    public String getImageResource() {
-        return imageResource;
-    }
-
-    public void setImageResource(String imageResource) {
-        this.imageResource = imageResource;
     }
 }

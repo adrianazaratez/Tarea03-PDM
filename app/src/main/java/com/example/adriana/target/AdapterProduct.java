@@ -69,9 +69,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.mTitle.setText(products.get(position).getTitle());
-        holder.mStore.setText(products.get(position).getStore());
-        holder.mLocation.setText(products.get(position).getLocation());
-        holder.mPhone.setText(products.get(position).getPhone());
+        holder.mStore.setText(products.get(position).getStore().getName());
+        holder.mLocation.setText(products.get(position).getStore().getCity().getName());
+        holder.mPhone.setText(products.get(position).getStore().getPhone());
         switch(products.get(position).getPicture()){
             case 0:
                 holder.mImage.setImageResource(R.drawable.lavadora);
@@ -103,7 +103,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:" + products.get(position).getPhone()));
+                        Uri.parse("tel:" + products.get(position).getStore().getPhone()));
                 v.getContext().startActivity(intent);
             }
         });
@@ -111,12 +111,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         holder.mSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemProduct product = new ItemProduct(products.get(position).getTitle(),
-                        products.get(position).getStore(),
-                        products.get(position).getLocation(),
-                        products.get(position).getPhone(),
-                        products.get(position).getPicture(),
-                        products.get(position).getCode());
+                ItemProduct product = new ItemProduct();
+                product.setTitle(products.get(position).getTitle());
+                product.setStore(products.get(position).getStore());
+                product.setPicture(products.get(position).getPicture());
+                product.setCode(products.get(position).getCode());
                 Intent intent = new Intent();
                 intent.setClass(context,ActivityProduct.class);
                 intent.putExtra("TAB",product);
@@ -126,12 +125,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         holder.mShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemProduct product = new ItemProduct(products.get(position).getTitle(),
-                        products.get(position).getStore(),
-                        products.get(position).getLocation(),
-                        products.get(position).getPhone(),
-                        products.get(position).getPicture(),
-                        products.get(position).getCode());
+                ItemProduct product = new ItemProduct();
+                product.setTitle(products.get(position).getTitle());
+                product.setStore(products.get(position).getStore());
+                product.setPicture(products.get(position).getPicture());
+                product.setCode(products.get(position).getCode());
                 Intent intent = new Intent();
                 intent.setClass(context,ActivityProduct.class);
                 intent.putExtra("TAB",product);
@@ -141,12 +139,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         holder.mCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemProduct product = new ItemProduct(products.get(position).getTitle(),
-                        products.get(position).getStore(),
-                        products.get(position).getLocation(),
-                        products.get(position).getPhone(),
-                        products.get(position).getPicture(),
-                        products.get(position).getCode());
+                ItemProduct product = new ItemProduct();
+                product.setTitle(products.get(position).getTitle());
+                product.setStore(products.get(position).getStore());
+                product.setPicture(products.get(position).getPicture());
+                product.setCode(products.get(position).getCode());
                 Intent intent = new Intent();
                 intent.setClass(context,ActivityProduct.class);
                 intent.putExtra("TAB",product);

@@ -50,5 +50,14 @@
     <string name="ip_see_more">SEE MORE</string>
     <string name="ip_share">SHARE</string>
 
+    <array name="spinner1">
+        <item>Mac</item>
+        <item>Alienware</item>
+        <item>Lanix</item>
+        <item>Lavadora</item>
+        <item>Sillon</item>
+        <item>Estereo</item>
+        <item>Cama</item>
+    </array>
 
 </resources>

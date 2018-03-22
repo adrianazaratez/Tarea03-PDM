@@ -1,5 +1,6 @@
-package com.example.adriana.target;
+package com.example.adriana.target.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.adriana.target.AdapterProduct;
+import com.example.adriana.target.R;
 import com.example.adriana.target.beans.ItemProduct;
+import com.example.adriana.target.database.DatabaseHandler;
+import com.example.adriana.target.database.ItemProductControl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,16 +23,18 @@ import java.util.Iterator;
  * Created by adriana on 01/03/2018.
  */
 
-public class FragmentHome extends android.support.v4.app.Fragment {
+public class FragmentTechnology extends android.support.v4.app.Fragment{
 
-    RecyclerView.Adapter adapter;
-    ArrayList<ItemProduct> products;
-    public FragmentHome(){
+    public FragmentTechnology(){
 
     }
 
+    RecyclerView.Adapter adapter;
+    ArrayList<ItemProduct> products;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         RecyclerView.LayoutManager mLayoutManager;
 
@@ -38,11 +45,20 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        products = new ArrayList<>();
-        products.add(new ItemProduct(getString(R.string.home_name_1),getString(R.string.home_store_1),getString(R.string.home_location_1),getString(R.string.home_phone_1), 5,5));
-        products.add(new ItemProduct(getString(R.string.home_name_2),getString(R.string.home_store_2),getString(R.string.home_location_2),getString(R.string.home_phone_2),6,6));
+        products = new ArrayList<ItemProduct>();
 
-        adapter = new AdapterProduct(getActivity(), products, getContext());
+        DatabaseHandler dh = DatabaseHandler.getInstance(FragmentTechnology.this.getContext());
+
+        ItemProductControl categoryProd = new ItemProductControl();
+
+        products = categoryProd.getItemProductsByCategory(0,dh);
+       /*
+        products.add(new ItemProduct(getString(R.string.tech_name_1), getString(R.string.tech_store_1), getString(R.string.tech_location_1), getString(R.string.tech_phone_1), 2,2));
+        products.add(new ItemProduct(getString(R.string.tech_name_2), getString(R.string.tech_store_2),  getString(R.string.tech_location_2),getString(R.string.tech_phone_2),3,3));
+        products.add(new ItemProduct(getString(R.string.tech_name_3), getString(R.string.tech_store_3),  getString(R.string.tech_location_3),getString(R.string.tech_phone_3),4,4));
+
+*/
+        adapter = new AdapterProduct(getActivity(), products,getContext());
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -62,4 +78,6 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         }
         adapter.notifyDataSetChanged();
     }
+
+
 }

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.adriana.target.beans.ItemProduct;
+import com.example.adriana.target.beans.Store;
 
 public class ActivityProduct extends AppCompatActivity {
 
@@ -46,9 +47,9 @@ public class ActivityProduct extends AppCompatActivity {
                 item = getIntent().getParcelableExtra("TAB");
                 if (item != null) {
                     title.setText(item.getTitle());
-                    store.setText(item.getStore());
-                    location.setText(item.getLocation());
-                    phone.setText(item.getPhone());
+                    store.setText(item.getStore().getName());
+                    location.setText(item.getStore().getCity().getName());
+                    phone.setText(item.getStore().getPhone());
                     switch (item.getPicture()){
                         case 0:
                             image.setImageResource(R.drawable.lavadora);
@@ -85,11 +86,13 @@ public class ActivityProduct extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productThingui = new ItemProduct(title.getText().toString(),
-                                                store.getText().toString(),
-                                                location.getText().toString(),
-                                                phone.getText().toString(),
-                                                item.getPicture(),item.getCode());
+                productThingui = new ItemProduct();
+                Store stores = new Store();
+                stores.setName(store.getText().toString());
+                productThingui.setTitle(title.getText().toString());
+                productThingui.setStore(stores);
+                productThingui.setPicture(item.getPicture());
+                productThingui.setCode(item.getCode());
                 Intent intent = new Intent();
                 intent.putExtra("TAB",productThingui);
                 setResult(RESULT_OK,intent);

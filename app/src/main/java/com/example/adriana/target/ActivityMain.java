@@ -3,7 +3,7 @@ package com.example.adriana.target;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,13 +17,17 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.adriana.target.beans.Category;
 import com.example.adriana.target.beans.ItemProduct;
+import com.example.adriana.target.beans.Store;
+import com.example.adriana.target.fragments.FragmentElectronics;
+import com.example.adriana.target.fragments.FragmentHome;
+import com.example.adriana.target.fragments.FragmentTechnology;
 
 import java.util.ArrayList;
 
@@ -60,6 +64,18 @@ public class ActivityMain extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+
+
+        FloatingActionButton add = findViewById(R.id.floatingActionButton);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityMain.this,ActivityItem.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -137,6 +153,7 @@ public class ActivityMain extends AppCompatActivity {
 
             AdapterProduct adapterProduct = new AdapterProduct(getActivity(), products, this.getContext());
             recyclerView.setAdapter(adapterProduct);
+
 
             return rootView;
         }
